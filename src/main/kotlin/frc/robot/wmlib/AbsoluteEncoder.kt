@@ -8,7 +8,7 @@ class AbsoluteEncoder(deviceId: Int, val offset: Double){
 
     val encoder: DutyCycleEncoder = DutyCycleEncoder(deviceId).apply{ setDutyCycleRange(1.0/4096.0, 4095.0/4096.0) }
 
-    fun getRadians(): Double = (( 1.0 - encoder.get()) * (2.0 * Math.PI)) - offset
+    fun getRadians(): Double = (( 1.0 - encoder.getAbsolutePosition()) * (2.0 * Math.PI)) - offset
 
     fun getDegrees(): Double = Math.toDegrees(getRadians())
 
