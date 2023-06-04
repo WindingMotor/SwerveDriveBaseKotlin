@@ -1,5 +1,6 @@
 // Winding Motor Libary (wmlib) - Created by Isaac S for team 2106
 
+package frc.robot.wmlib
 import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkMaxLowLevel.MotorType
 import com.revrobotics.CANSparkMax.IdleMode
@@ -21,8 +22,8 @@ class SparkMax(deviceId: Int, motorInverted: Boolean, encoderInverted: Boolean) 
 
     val encoder: RelativeEncoder = motor.encoder.apply{ 
         setInverted(encoderInverted);
-        if((positionConversionFactor > -1.0) && (velocityConversionFactor > -1.0)){ // Set the converison factors if needed
-            setPositionConversionFactor(positionConversionFactor); setVelocityConversionFactor(velocityConversionFactor);}
+        if((positionConversionFactor != -1.0) && (velocityConversionFactor != -1.0)){ // Set the converison factors if needed
+            setPositionConversionFactor(positionConversionFactor); setVelocityConversionFactor(velocityConversionFactor); }
     }
 
     fun set(speed: Double){ motor.set(speed) }
@@ -30,12 +31,11 @@ class SparkMax(deviceId: Int, motorInverted: Boolean, encoderInverted: Boolean) 
     fun stop(){ motor.stopMotor() }
 
     /* @param true sets brake mode and false sets idle mode */
-    fun setIdleMode(isBrake: Boolean){if (isBrake) motor.setIdleMode(IdleMode.kBrake) else motor.setIdleMode(IdleMode.kCoast)}
+    fun setBrakeMode(isBrake: Boolean){if (isBrake) motor.setIdleMode(IdleMode.kBrake) else motor.setIdleMode(IdleMode.kCoast)}
 
     fun resetEncoder(){ encoder.position = 0.0 }
 
     fun getEncoderPosition(): Double = encoder.position
     fun getEncoderVelocity(): Double = encoder.velocity
-    
 
 }

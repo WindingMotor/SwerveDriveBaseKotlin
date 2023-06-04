@@ -1,5 +1,6 @@
 // Winding Motor Libary (wmlib) - Created by Isaac S for team 2106
 
+package frc.robot.wmlib
 import edu.wpi.first.wpilibj.DutyCycleEncoder
 import edu.wpi.first.math.geometry.Rotation2d
 import java.lang.Math
@@ -13,6 +14,5 @@ class AbsoluteEncoder(deviceId: Int, val offset: Double){
     fun getDegrees(): Double = Math.toDegrees(getRadians())
 
     fun getRotation2d(): Rotation2d = Rotation2d(getRadians())
-
 
 }

@@ -1,14 +1,15 @@
 // Winding Motor Libary (wmlib) - Created by Isaac S for team 2106
 
-package frc.robot.swerve
+package frc.robot.wmlib
 import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkMaxLowLevel.MotorType
 import com.revrobotics.RelativeEncoder
-import SparkMax
-import AbsoluteEncoder
+import frc.robot.wmlib.SparkMax
+import frc.robot.wmlib.AbsoluteEncoder
 import frc.robot.Constants
 import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.kinematics.SwerveModuleState
+import edu.wpi.first.math.kinematics.SwerveModulePosition
 import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj.DriverStation
@@ -30,7 +31,7 @@ class SwerveModule(
     private val turnPID: PIDController = PIDController(Constants.SwerveConstants.TURN_MODULE_PID_P, Constants.SwerveConstants.TURN_MODULE_PID_I,
         Constants.SwerveConstants.TURN_MODULE_PID_D).apply { enableContinuousInput(-Math.PI, Math.PI) }
     
-    fun resetAllEncoders(){ driveMotor.resetEncoder(); turnMotor.encoder.position = absoluteEncoder.getRadians() }
+    fun resetEncoders(){ driveMotor.resetEncoder(); turnMotor.encoder.position = absoluteEncoder.getRadians() }
 
     fun getState(): SwerveModuleState = SwerveModuleState(driveMotor.getEncoderVelocity(), Rotation2d(turnMotor.getEncoderPosition()))
 
@@ -50,8 +51,12 @@ class SwerveModule(
     fun getMotorsTemperature(): Array<Double> = arrayOf(driveMotor.motor.motorTemperature, turnMotor.motor.motorTemperature)
 
     fun getMotorFaults(): Array<Short> = arrayOf(driveMotor.motor.faults, turnMotor.motor.faults)
+    
+    fun getPosition(): SwerveModulePosition = SwerveModulePosition(driveMotor.encoder.position, Rotation2d(turnMotor.encoder.position))
 
-    fun updateSmartDashboard(){ SmartDashboard.putString("Swerve module $moduleName :", getState().toString()) }
+    fun updateSmartDashboard(){
+        SmartDashboard.putString("Swerve module $moduleName :", getState().toString()) 
+    }
 
     fun updateSmartDashboardDebug(){ updateSmartDashboard()
         DriverStation.reportWarning("DEBUG is on for $moduleName", true)
@@ -59,4 +64,5 @@ class SwerveModule(
         SmartDashboard.putNumber("${moduleName} ABE RAD: ", absoluteEncoder.getRadians())
         SmartDashboard.putNumber("${moduleName} ABE Offset RAD: ", absoluteEncoderOffsetRadians)
     }
+
 }
