@@ -12,5 +12,6 @@ class AbsoluteEncoder(deviceId: Int, val offset: Double){
     fun getDegrees(): Double = Math.toDegrees(getRadians())
 
     fun getRotation2d(): Rotation2d = Rotation2d(getRadians())
+=
 
 }

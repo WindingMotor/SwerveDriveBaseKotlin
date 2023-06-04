@@ -23,7 +23,7 @@ class Motor(deviceId: Int, motorInverted: Boolean, encoderInverted: Boolean) {
             setPositionConversionFactor(positionConversionFactor); setVelocityConversionFactor(velocityConversionFactor);}
     }
 
-    fun setSpeed(speed: Double){ motor.set(speed) }
+    fun set(speed: Double){ motor.set(speed) }
 
     fun stop(){ motor.stopMotor() }
 
@@ -31,6 +31,9 @@ class Motor(deviceId: Int, motorInverted: Boolean, encoderInverted: Boolean) {
     fun setIdleMode(isBrake: Boolean){if (isBrake) motor.setIdleMode(IdleMode.kBrake) else motor.setIdleMode(IdleMode.kCoast)}
 
     fun resetEncoder(){ encoder.position = 0.0 }
+
+    fun getEncoderPosition(): Double = encoder.position
+    fun getEncoderVelocity(): Double = encoder.velocity
     
 
 }

@@ -13,7 +13,7 @@ class Constants {
 
     object MK4SDS{
 
-      const val WHEEL_DIAMETER = 0.1016 //4 in
+      const val WHEEL_DIAMETER = 0.1016 // 4 in
       const val DRIVE_GEAR_RATIO = 1 / 8.14
       const val TURN_GEAR_RATIO = 1 / 12.8
 
@@ -22,6 +22,8 @@ class Constants {
 
       const val DRIVE_RPM_2_MPS = DRIVE_ROT_2_METER / 60;
       const val TURN_RPM_2_RADPS = TURN_ROT_2_RAD / 60;
+
+      const val THEORETICAL_MAX_SPEED = 3.6 // 12 ft/s
     
     }
 
