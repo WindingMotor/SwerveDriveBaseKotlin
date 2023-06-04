@@ -8,6 +8,7 @@ class Motor(deviceId: Int, motorInverted: Boolean, encoderInverted: Boolean) {
     private var positionConversionFactor = -1.0
     private var velocityConversionFactor = -1.0
 
+    // Second constructor for conversion factors
     constructor(deviceId: Int, motorInverted: Boolean, encoderInverted: Boolean,
     newPositionConversionFactor: Double, newVelocityConversionFactor: Double):this(deviceId,motorInverted,encoderInverted){
         positionConversionFactor = newPositionConversionFactor;
@@ -18,9 +19,8 @@ class Motor(deviceId: Int, motorInverted: Boolean, encoderInverted: Boolean) {
 
     val encoder: RelativeEncoder = motor.encoder.apply{ 
         setInverted(encoderInverted);
-        if((positionConversionFactor > -1.0) && (velocityConversionFactor > -1.0)){
+        if((positionConversionFactor > -1.0) && (velocityConversionFactor > -1.0)){ // Set the converison factors if needed
             setPositionConversionFactor(positionConversionFactor); setVelocityConversionFactor(velocityConversionFactor);}
-
     }
 
     fun setSpeed(speed: Double){ motor.set(speed) }

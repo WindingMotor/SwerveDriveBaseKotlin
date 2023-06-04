@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType
 import com.revrobotics.RelativeEncoder
 import Motor
 import AbsoluteEncoder
+import frc.robot.Constants
 
 // Class Parameters
 class SwerveModule(
@@ -16,9 +17,9 @@ class SwerveModule(
     private val moduleName: String
 ){
 
-    private val driveMotor: Motor = Motor(driveID,driveInverted,false)
-    private val turnMotor: Motor = Motor(turnID,turnInverted,false)
+    private val driveMotor: Motor = Motor(driveID, driveInverted, false, Constants.MK4SDS.DRIVE_ROT_2_METER, Constants.MK4SDS.DRIVE_RPM_2_MPS)
+    private val turnMotor: Motor = Motor(turnID, turnInverted, false, Constants.MK4SDS.TURN_ROT_2_RAD, Constants.MK4SDS.TURN_RPM_2_RADPS)
     private val absoluteEncoder: AbsoluteEncoder = AbsoluteEncoder(absoluteEncoderID, absoluteEncoderOffsetRadians)
 
-    
+
 }

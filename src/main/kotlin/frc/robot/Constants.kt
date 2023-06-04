@@ -6,10 +6,27 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics
 class Constants {
 
     object OperatorConstants{
-        const val kDriverControllerPort = 1;
+
+      const val kDriverControllerPort = 1;
+  
     }
 
-    object SwerveConstants {
+    object MK4SDS{
+
+      const val WHEEL_DIAMETER = 0.1016 //4 in
+      const val DRIVE_GEAR_RATIO = 1 / 8.14
+      const val TURN_GEAR_RATIO = 1 / 12.8
+
+      const val DRIVE_ROT_2_METER = DRIVE_GEAR_RATIO * Math.PI * WHEEL_DIAMETER
+      const val TURN_ROT_2_RAD = TURN_GEAR_RATIO * 2 * Math.PI
+
+      const val DRIVE_RPM_2_MPS = DRIVE_ROT_2_METER / 60;
+      const val TURN_RPM_2_RADPS = TURN_ROT_2_RAD / 60;
+    
+    }
+
+
+    object SwerveConstants{
 
     /* 
            MODULE ID ORDER
