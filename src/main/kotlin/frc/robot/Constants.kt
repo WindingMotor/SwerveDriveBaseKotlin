@@ -24,7 +24,6 @@ class Constants {
       const val TURN_RPM_2_RADPS = TURN_ROT_2_RAD / 60;
 
       const val THEORETICAL_MAX_SPEED = 3.6 // 12 ft/s
-    
     }
 
 
@@ -80,6 +79,8 @@ class Constants {
 
     const val TELEOP_SLEW_VELOCITY_UNITS = 8;
     const val TELEOP_SLEW_ANGULAR_UNITS = 2;
+    
+    const val TELEOP_MIN_STATE_CHANGE = 0.001;
 
     // PIDs
     const val TURN_MODULE_PID_P = 0.5;
