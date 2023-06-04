@@ -3,8 +3,6 @@ A compact and efficient FRC swerve drive programmed in Kotlin. This
 Wpilib project is up to date (2023/2024) and is using the Kotlin extension created 
 by Brenek Harrison. You can get it here at: https://marketplace.visualstudio.com/items?itemName=Brenek.kotlin-for-frc
 
-Swerve Drive Base for 2023/2024. Using Neos and SRX Mag Encoders - Currently a work in progress!
-
 ## Why Kotlin?
 Kotlin makes code easier to read and way simpler. It allows 
 code to be prototyped and written faster. Kotlin also has
