@@ -1,8 +1,10 @@
+// Winding Motor Libary (wmlib) - Created by Isaac S for team 2106
+
 package frc.robot.swerve
 import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkMaxLowLevel.MotorType
 import com.revrobotics.RelativeEncoder
-import Motor
+import SparkMax
 import AbsoluteEncoder
 import frc.robot.Constants
 import edu.wpi.first.math.controller.PIDController
@@ -21,8 +23,8 @@ class SwerveModule(
     private val moduleName: String
 ){
 
-    private val driveMotor: Motor = Motor(driveID, driveInverted, false, Constants.MK4SDS.DRIVE_ROT_2_METER, Constants.MK4SDS.DRIVE_RPM_2_MPS)
-    private val turnMotor: Motor = Motor(turnID, turnInverted, false, Constants.MK4SDS.TURN_ROT_2_RAD, Constants.MK4SDS.TURN_RPM_2_RADPS)
+    private val driveMotor: SparkMax = SparkMax(driveID, driveInverted, false, Constants.MK4SDS.DRIVE_ROT_2_METER, Constants.MK4SDS.DRIVE_RPM_2_MPS)
+    private val turnMotor: SparkMax = SparkMax(turnID, turnInverted, false, Constants.MK4SDS.TURN_ROT_2_RAD, Constants.MK4SDS.TURN_RPM_2_RADPS)
     private val absoluteEncoder: AbsoluteEncoder = AbsoluteEncoder(absoluteEncoderID, absoluteEncoderOffsetRadians)
 
     private val turnPID: PIDController = PIDController(Constants.SwerveConstants.TURN_MODULE_PID_P, Constants.SwerveConstants.TURN_MODULE_PID_I,
@@ -39,6 +41,8 @@ class SwerveModule(
         }
     }
 
+    fun stopMotors(){ driveMotor.stop(); turnMotor.stop(); }
+
     fun setAngle(angle: Rotation2d){ turnMotor.set(turnPID.calculate(turnMotor.encoder.position, angle.radians)) }
 
     fun getMotorsCurrent(): Array<Double> = arrayOf(driveMotor.motor.outputCurrent, turnMotor.motor.outputCurrent)
@@ -49,8 +53,7 @@ class SwerveModule(
 
     fun updateSmartDashboard(){ SmartDashboard.putString("Swerve module $moduleName :", getState().toString()) }
 
-    fun updateSmartDashboardDebug() {
-        updateSmartDashboard()
+    fun updateSmartDashboardDebug(){ updateSmartDashboard()
         DriverStation.reportWarning("DEBUG is on for $moduleName", true)
         SmartDashboard.putNumber("${moduleName} ABE Raw: ", absoluteEncoder.encoder.absolutePosition)
         SmartDashboard.putNumber("${moduleName} ABE RAD: ", absoluteEncoder.getRadians())

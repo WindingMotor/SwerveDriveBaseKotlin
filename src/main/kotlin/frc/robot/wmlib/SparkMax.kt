@@ -1,9 +1,11 @@
+// Winding Motor Libary (wmlib) - Created by Isaac S for team 2106
+
 import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkMaxLowLevel.MotorType
 import com.revrobotics.CANSparkMax.IdleMode
 import com.revrobotics.RelativeEncoder
 
-class Motor(deviceId: Int, motorInverted: Boolean, encoderInverted: Boolean) {
+class SparkMax(deviceId: Int, motorInverted: Boolean, encoderInverted: Boolean) {
 
     private var positionConversionFactor = -1.0
     private var velocityConversionFactor = -1.0
