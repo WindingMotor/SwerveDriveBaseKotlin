@@ -14,6 +14,7 @@ import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj.DriverStation
 
+// Class parameters
 class SwerveModule(
     driveID: Int,
     turnID: Int,
@@ -24,13 +25,16 @@ class SwerveModule(
     private val moduleName: String
 ){
 
+    // Object creation
     private val driveMotor: SparkMax = SparkMax(driveID, driveInverted, false, Constants.MK4SDS.DRIVE_ROT_2_METER, Constants.MK4SDS.DRIVE_RPM_2_MPS)
     private val turnMotor: SparkMax = SparkMax(turnID, turnInverted, false, Constants.MK4SDS.TURN_ROT_2_RAD, Constants.MK4SDS.TURN_RPM_2_RADPS)
     private val absoluteEncoder: AbsoluteEncoder = AbsoluteEncoder(absoluteEncoderID, absoluteEncoderOffsetRadians)
 
     private val turnPID: PIDController = PIDController(Constants.SwerveConstants.TURN_MODULE_PID_P, Constants.SwerveConstants.TURN_MODULE_PID_I,
         Constants.SwerveConstants.TURN_MODULE_PID_D).apply { enableContinuousInput(-Math.PI, Math.PI) }
-    
+    // ------------ //
+
+    // Functions
     fun resetEncoders(){ driveMotor.resetEncoder(); turnMotor.encoder.position = absoluteEncoder.getRadians() }
 
     fun getState(): SwerveModuleState = SwerveModuleState(driveMotor.getEncoderVelocity(), Rotation2d(turnMotor.getEncoderPosition()))
@@ -53,7 +57,9 @@ class SwerveModule(
     fun getMotorFaults(): Array<Short> = arrayOf(driveMotor.motor.faults, turnMotor.motor.faults)
     
     fun getPosition(): SwerveModulePosition = SwerveModulePosition(driveMotor.encoder.position, Rotation2d(turnMotor.encoder.position))
+    // ------------ //
 
+    // Smart Dashboard
     fun updateSmartDashboard(){
         SmartDashboard.putString("Swerve module $moduleName :", getState().toString()) 
     }

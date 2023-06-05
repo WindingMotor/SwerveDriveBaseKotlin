@@ -54,10 +54,11 @@ class NavX(){
         updateSmartDashboard()
         SmartDashboard.putNumber("Robot Radians", getRadians())
         SmartDashboard.putString("Robot Rotation2d", getRotation2d().toString())
+        SmartDashboard.putNumber("NavX Fused Heading", getFusedHeading())
         SmartDashboard.putBoolean("NavX Connected", gyro.isConnected)
         SmartDashboard.putBoolean("NavX Calibrating", gyro.isCalibrating)
         SmartDashboard.putBoolean("NavX Interference", gyro.isMagneticDisturbance)
-        SmartDashboard.putNumber("NavX Fused Heading", getFusedHeading())
+
     }
 
 }
