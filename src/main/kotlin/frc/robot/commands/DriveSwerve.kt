@@ -32,7 +32,7 @@ class DriveSwerve(
 
         val chassisSpeeds = if(isFieldOriented()){
             ChassisSpeeds.fromFieldRelativeSpeeds(xInput(), yInput(), rInput() + rCorrection, subsystem.gyro.getRotation2d())}
-            else{ChassisSpeeds(xInput(), yInput(), rInput() + rCorrection)}
+            else{ ChassisSpeeds(xInput(), yInput(), rInput() + rCorrection) }
 
         subsystem.setStates(Constants.SwerveConstants.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds))
 

@@ -22,8 +22,7 @@ class Constants {
 
       const val DRIVE_RPM_2_MPS = DRIVE_ROT_2_METER / 60;
       const val TURN_RPM_2_RADPS = TURN_ROT_2_RAD / 60;
-
-      const val THEORETICAL_MAX_SPEED = 3.6 // 12 ft/s
+  
     }
 
 

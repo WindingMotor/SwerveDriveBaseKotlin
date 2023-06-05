@@ -44,7 +44,7 @@ class SwerveModule(
     // @param (state) (SwerveModuleState) Set the current state of the module
     fun setState(state: SwerveModuleState){ if(Math.abs(state.speedMetersPerSecond) > Constants.SwerveConstants.TELEOP_MIN_STATE_CHANGE){
             var optimizedState = SwerveModuleState.optimize(state, getState().angle)
-            driveMotor.set(optimizedState.speedMetersPerSecond / Constants.MK4SDS.THEORETICAL_MAX_SPEED)
+            driveMotor.set(optimizedState.speedMetersPerSecond / Constants.SwerveConstants.PHYSICAL_MAX_VELOCITY_MS)
             turnMotor.set(turnPID.calculate(turnMotor.encoder.position, optimizedState.angle.radians))
         }else{ stopMotors() }
     }

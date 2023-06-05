@@ -61,7 +61,7 @@ class SwerveSubsystem : SubsystemBase() {
 
     // @param (states) (SwerveModuleState:ARRAY) The new state to set each swerve module to
     fun setStates(states: Array<SwerveModuleState>) {
-        SwerveDriveKinematics.desaturateWheelSpeeds(states, Constants.MK4SDS.THEORETICAL_MAX_SPEED)
+        SwerveDriveKinematics.desaturateWheelSpeeds(states, Constants.SwerveConstants.PHYSICAL_MAX_VELOCITY_MS)
         frontLeft.setState(states[0]); frontRight.setState(states[1]);
         backLeft.setState(states[2]); backRight.setState(states[3]);
     }
