@@ -6,15 +6,15 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType
 import com.revrobotics.CANSparkMax.IdleMode
 import com.revrobotics.RelativeEncoder
 
-class SparkMax(deviceId: Int, motorInverted: Boolean, encoderInverted: Boolean) {
+class SparkMax(deviceId: Int, motorInverted: Boolean) {
 
     // Create converison factor variables and set to defualt -1.0 
     private var positionConversionFactor = -1.0
     private var velocityConversionFactor = -1.0
 
     // Second constructor -> using conversion factors
-    constructor(deviceId: Int, motorInverted: Boolean, encoderInverted: Boolean,
-    newPositionConversionFactor: Double, newVelocityConversionFactor: Double):this(deviceId,motorInverted,encoderInverted){
+    constructor(deviceId: Int, motorInverted: Boolean,
+    newPositionConversionFactor: Double, newVelocityConversionFactor: Double):this(deviceId,motorInverted){
         positionConversionFactor = newPositionConversionFactor;
         velocityConversionFactor = newVelocityConversionFactor;
     }
@@ -24,7 +24,6 @@ class SparkMax(deviceId: Int, motorInverted: Boolean, encoderInverted: Boolean) 
 
     // Create encoder and apply coversion factors if necessary 
     val encoder: RelativeEncoder = motor.encoder.apply{ 
-        setInverted(encoderInverted);
         if((positionConversionFactor != -1.0) && (velocityConversionFactor != -1.0)){ // Set the converison factors if needed
             setPositionConversionFactor(positionConversionFactor); setVelocityConversionFactor(velocityConversionFactor); }
     }

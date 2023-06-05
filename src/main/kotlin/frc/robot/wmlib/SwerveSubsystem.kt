@@ -14,14 +14,6 @@ import frc.robot.Constants
 
 class SwerveSubsystem : SubsystemBase() {
 
-    // Create a navX gyro from wmlib
-    val gyro = NavX()
-
-    // Create robot odometry
-    val odometry = SwerveDriveOdometry(Constants.SwerveConstants.DRIVE_KINEMATICS,
-    gyro.getRotation2d(), // Should be wrapped from -180 to 180 or 0 to 360 -> wmlib NavX class does this
-    getAllPositions())
-    
     // Create 4 swerve modules with their respective constants
     private val frontLeft = SwerveModule(
         Constants.SwerveConstants.FRONT_LEFT_DRIVE_ID, Constants.SwerveConstants.FRONT_LEFT_TURN_ID,
@@ -42,7 +34,15 @@ class SwerveSubsystem : SubsystemBase() {
         Constants.SwerveConstants.BACK_RIGHT_DRIVE_ID, Constants.SwerveConstants.BACK_RIGHT_TURN_ID,
         Constants.SwerveConstants.BACK_RIGHT_DRIVE_INVERTED, Constants.SwerveConstants.BACK_RIGHT_TURN_INVERTED,
         Constants.SwerveConstants.BACK_RIGHT_ABE_ID, Constants.SwerveConstants.BACK_RIGHT_ABE_OFFSET_RAD, "Back Right");
-    // ------------ //
+    
+    // Create a navX gyro from wmlib
+    val gyro = NavX()
+
+    // Create robot odometry
+    val odometry = SwerveDriveOdometry(Constants.SwerveConstants.DRIVE_KINEMATICS,
+    gyro.getRotation2d(), // Should be wrapped from -180 to 180 or 0 to 360 -> wmlib NavX class does this
+    getAllPositions())
+    
 
     // Stop every module's motors
     fun stopAll(){ frontLeft.stopMotors(); frontRight.stopMotors(); backLeft.stopMotors(); backRight.stopMotors(); }
@@ -79,7 +79,10 @@ class SwerveSubsystem : SubsystemBase() {
     fun getPoseMeters(): Pose2d = odometry.poseMeters
 
     // Updates the robot odometry
-    override fun periodic(){ odometry.update(gyro.getRotation2d(), getAllPositions()) }
+    override fun periodic(){
+        odometry.update(gyro.getRotation2d(), getAllPositions())
+        updateAllSmartDashboard()
+    }
 
     // Print SmartDashboard data for this class
     private fun updateSmartDashboard(){ SmartDashboard.putString("Odometry Pose2d", getPoseMeters().toString()) }

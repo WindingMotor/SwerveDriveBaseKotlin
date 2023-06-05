@@ -25,8 +25,8 @@ class SwerveModule(
     private val moduleName: String
 ){
     // Create both motors using class from wmlib
-    private val driveMotor: SparkMax = SparkMax(driveID, driveInverted, false, Constants.MK4SDS.DRIVE_ROT_2_METER, Constants.MK4SDS.DRIVE_RPM_2_MPS)
-    private val turnMotor: SparkMax = SparkMax(turnID, turnInverted, false, Constants.MK4SDS.TURN_ROT_2_RAD, Constants.MK4SDS.TURN_RPM_2_RADPS)
+    private val driveMotor: SparkMax = SparkMax(driveID, driveInverted, Constants.MK4SDS.DRIVE_ROT_2_METER, Constants.MK4SDS.DRIVE_RPM_2_MPS)
+    private val turnMotor: SparkMax = SparkMax(turnID, turnInverted, Constants.MK4SDS.TURN_ROT_2_RAD, Constants.MK4SDS.TURN_RPM_2_RADPS)
 
     // Create absolute encoder using class from wmlib
     private val absoluteEncoder: AbsoluteEncoder = AbsoluteEncoder(absoluteEncoderID, absoluteEncoderOffsetRadians)

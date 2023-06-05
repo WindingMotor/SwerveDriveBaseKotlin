@@ -16,6 +16,7 @@ class NavX(){
     val gyro = AHRS(SPI.Port.kMXP)
 
     init{
+        
         // Calibrate the gyro on a new thread
         Thread{
         try{
@@ -23,6 +24,7 @@ class NavX(){
             gyro.calibrate()
         }catch(e: Exception){ DriverStation.reportWarning("Gyro (THREAD) calibration error!", true)}
         }.start()
+        
     }
 
     // Zero the gyro 

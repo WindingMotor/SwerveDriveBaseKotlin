@@ -1,11 +1,4 @@
 {
-  "HALProvider": {
-    "Other Devices": {
-      "window": {
-        "visible": false
-      }
-    }
-  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo"
@@ -14,6 +7,11 @@
   "NetworkTables": {
     "Retained Values": {
       "open": false
+    },
+    "transitory": {
+      "SmartDashboard": {
+        "open": true
+      }
     }
   }
 }
