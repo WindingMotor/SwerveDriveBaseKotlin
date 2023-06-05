@@ -40,7 +40,7 @@ class SwerveSubsystem : SubsystemBase() {
         Constants.SwerveConstants.BACK_RIGHT_DRIVE_INVERTED, Constants.SwerveConstants.BACK_RIGHT_TURN_INVERTED,
         Constants.SwerveConstants.BACK_RIGHT_ABE_ID, Constants.SwerveConstants.BACK_RIGHT_ABE_OFFSET_RAD, "Back Right");
     // ------------ //
-    
+
     // Swerve Modules
     fun stopAll(){ frontLeft.stopMotors(); frontRight.stopMotors(); backLeft.stopMotors(); backRight.stopMotors(); }
 
@@ -68,12 +68,20 @@ class SwerveSubsystem : SubsystemBase() {
     // ------------ //
 
     // Loops
-    fun updateSmartDashboard(){
-        SmartDashboard.putString("Odometry Pose2d", getPoseMeters().toString())
+    override fun periodic(){ odometry.update(gyro.getRotation2d(), getAllPositions()) }
+
+    private fun updateSmartDashboard(){ SmartDashboard.putString("Odometry Pose2d", getPoseMeters().toString()) }
+
+    fun updateAllSmartDashboard(){
+        this.updateSmartDashboard(); gyro.updateSmartDashboard();
+        frontLeft.updateSmartDashboard(); frontRight.updateSmartDashboard();
+        backLeft.updateSmartDashboard(); backRight.updateSmartDashboard();
     }
 
-    override fun periodic(){
-        odometry.update(gyro.getRotation2d(), getAllPositions())
+    fun updateAllSmartDashboardDebug(){
+        this.updateSmartDashboard(); gyro.updateSmartDashboardDebug();
+        frontLeft.updateSmartDashboardDebug(); frontRight.updateSmartDashboardDebug();
+        backLeft.updateSmartDashboardDebug(); backRight.updateSmartDashboardDebug();
     }
     // ------------ //
 
