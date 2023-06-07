@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase
 import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.kinematics.ChassisSpeeds
 import edu.wpi.first.math.kinematics.SwerveModuleState
+import edu.wpi.first.math.filter.SlewRateLimiter
 import frc.robot.wmlib.SwerveSubsystem
 import frc.robot.Constants
 
@@ -16,6 +17,10 @@ class DriveSwerve(
     private val rInput: () -> Double,
     private val isFieldOriented: () -> Boolean,
 ):CommandBase(){
+
+    private val xSlew = SlewRateLimiter(Constants.SwerveConstants.TELEOP_SLEW_VELOCITY_UNITS)
+    private val ySlew = SlewRateLimiter(Constants.SwerveConstants.TELEOP_SLEW_VELOCITY_UNITS)
+    private val rSlew = SlewRateLimiter(Constants.SwerveConstants.TELEOP_SLEW_ANGULAR_UNITS)
 
     private val rPID = PIDController(0.1,0.0,0.0)
 
@@ -30,9 +35,13 @@ class DriveSwerve(
 
         val rCorrection = rPID.calculate(subsystem.gyro.getDegrees())
 
+        var xSpeed = xSlew.calculate(xInput())
+        var ySpeed = ySlew.calculate(yInput())
+        var rSpeed = rSlew.calculate(rInput())
+
         val chassisSpeeds = if(isFieldOriented()){
-            ChassisSpeeds.fromFieldRelativeSpeeds(xInput(), yInput(), rInput() + rCorrection, subsystem.gyro.getRotation2d())}
-            else{ ChassisSpeeds(xInput(), yInput(), rInput() + rCorrection) }
+            ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rSpeed + rCorrection, subsystem.gyro.getRotation2d())}
+            else{ ChassisSpeeds(xSpeed, ySpeed, rSpeed + rCorrection) }
 
         subsystem.setStates(Constants.SwerveConstants.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds))
 

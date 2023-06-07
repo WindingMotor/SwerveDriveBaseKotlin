@@ -1,7 +1,6 @@
 // Winding Motor Libary (wmlib) - Created by Isaac S for team 2106
 
 package frc.robot.wmlib
-import edu.wpi.first.wpilibj.DutyCycleEncoder
 import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry
 import java.lang.Math
@@ -40,11 +39,11 @@ class NavX(){
     
     // @return (Double) The robot heading wrapped from 0 to 360 in degrees
     fun getDegrees(): Double = if((gyro.angle % 360) < 0.0){(gyro.angle % 360) + 360}else{(gyro.angle % 360)}
-
+    
     // @return (Double) The robot heading in radians wrapped
     fun getRadians(): Double = Math.toRadians(getDegrees())
 
-    // @return (Rotation2d) The robot heading in Rotation2d wrapped
+    // @return (Rotation2d) The robot heading in Rotation2d wrao.anglepped
     fun getRotation2d(): Rotation2d = Rotation2d(getRadians())
 
     // @return (Double) The estimated robot heading (Yaw) -> should be wrapped? -> for testing only!

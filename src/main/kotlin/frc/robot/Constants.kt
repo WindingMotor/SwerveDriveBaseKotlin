@@ -8,6 +8,8 @@ class Constants {
     object OperatorConstants{
 
       const val kDriverControllerPort = 1;
+      const val ELEVATOR_MAX = 5.0
+      const val ELEVATOR_MIN = 0.0
   
     }
 
@@ -24,7 +26,6 @@ class Constants {
       const val TURN_RPM_2_RADPS = TURN_ROT_2_RAD / 60;
   
     }
-
 
     object SwerveConstants{
 
@@ -76,8 +77,8 @@ class Constants {
     const val TELEOP_MAX_VELOCITY_MS = PHYSICAL_MAX_VELOCITY_MS;
     const val TELEOP_MAX_ANGULAR_RADS = PHYSICAL_MAX_ANGULAR_RADS;
 
-    const val TELEOP_SLEW_VELOCITY_UNITS = 8;
-    const val TELEOP_SLEW_ANGULAR_UNITS = 2;
+    const val TELEOP_SLEW_VELOCITY_UNITS = 8.10;
+    const val TELEOP_SLEW_ANGULAR_UNITS = 2.10;
     
     const val TELEOP_MIN_STATE_CHANGE = 0.001;
 

@@ -82,6 +82,16 @@ class SwerveSubsystem : SubsystemBase() {
     override fun periodic(){
         odometry.update(gyro.getRotation2d(), getAllPositions())
         updateAllSmartDashboard()
+
+
+
+
+    
+
+
+
+
+
     }
 
     // Print SmartDashboard data for this class
