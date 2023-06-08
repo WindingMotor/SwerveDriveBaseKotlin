@@ -11,10 +11,11 @@ various features java does not like null safety.
 ## This part of the code is done:
 #### Boilerplate SparkMax and Absolute encoder
 #### SwerveModule class
+#### SwerveSubsystem
+#### SwerveModule drive command
 
 ## Here is what is currently being worked on:
-#### SwerveSubsystem
-#### SwerveModule commands
+#### SwerveModule extra commands
 
 ## This is not done:
 #### Autonomous
